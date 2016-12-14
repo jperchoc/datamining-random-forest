@@ -55,6 +55,11 @@ namespace DataMining
 
         public bool moyennageClassifier = true;
 
+        public RandomForest()
+        {
+            PredictCuts = true;
+        }
+
         public String OtherClassName
         {
             get { return _otherClassName; }
