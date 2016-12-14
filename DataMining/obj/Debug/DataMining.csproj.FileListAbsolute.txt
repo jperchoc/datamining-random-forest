@@ -1,4 +1,0 @@
-F:\Developpement\C#\Projets\DataMining\DataMining\DataMining\bin\Debug\DataMining.pdb
-F:\Developpement\C#\Projets\DataMining\DataMining\DataMining\obj\Debug\DataMining.pdb
-F:\Developpement\C#\Projets\DataMining\DataMining\DataMining\bin\Debug\DataMining.exe
-F:\Developpement\C#\Projets\DataMining\DataMining\DataMining\obj\Debug\DataMining.exe
