@@ -22,6 +22,8 @@
 /*              du type de retour de la méthode */
 /*              predict                         */
 /* 15/03/2016 : Mise en place du multithreading */
+/* 17/12/2016 : Utilisation de Task au lieu de  */
+/*              BackgroundWorker                */
 /************************************************/
 using System;
 using System.Collections.Generic;
@@ -271,10 +273,10 @@ namespace DataMining
             for (int t = 0; t < nbThreads; t++)
             {
                 _EventsWorkerCompleted.Add(new System.Threading.AutoResetEvent(false));
-                BackgroundWorker bg = new BackgroundWorker();
-                bg.DoWork += ((a, b) =>
+                int thread = t;
+                Task.Run(() => 
                 {
-                    int nThread = (int)b.Argument;
+                    int nThread = thread;
                     List<RandomForestNode> trees = new List<RandomForestNode>();
                     for (int i = 0; i < forestSize / nbThreads; i++)
                     {
@@ -286,12 +288,9 @@ namespace DataMining
                         _forest.AddRange(trees);
                     _EventsWorkerCompleted[nThread].Set();
                 });
-                bg.RunWorkerAsync(t);
             }
-
             foreach (var eventWait in _EventsWorkerCompleted)
                 eventWait.WaitOne();
-            //_workerCompleted.WaitOne();
 
             //On ajoute les arbres manquants
             List<RandomForestNode> treesa = new List<RandomForestNode>();
